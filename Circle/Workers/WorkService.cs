@@ -32,7 +32,6 @@ namespace Circle.Workers
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _options.CancellationToken = stoppingToken;
             _logger.LogInformation($"Starting Circle Service [period={_options.Period}]");
             
             while (!_options.CancellationToken.IsCancellationRequested)
@@ -40,6 +39,11 @@ namespace Circle.Workers
                 _logger.LogInformation($"Executing work");
                 _work.DoWork();
                 await Task.Delay(_options.Period, _options.CancellationToken);
+                
+                if (_options.OnceLaunch)
+                {
+                    break;
+                }
             }
         }
 

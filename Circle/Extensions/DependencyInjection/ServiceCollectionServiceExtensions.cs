@@ -1,13 +1,12 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Circle.Interfaces;
 using Circle.Options;
 using Circle.Workers;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Circle.Extensions.DependencyInjection
 {
@@ -29,6 +28,54 @@ namespace Circle.Extensions.DependencyInjection
             }
 
             services.Configure(setupAction);
+
+            // new HostBuilder()    //This creates a new web host
+            //     .conf
+            //     .UseKestrel()       //Use the Kestrel web server that we just added with NuGet
+            //     .UseContentRoot(Directory.GetCurrentDirectory())   // Use the current working as root directory for the host 
+            //     .UseStartup<Startup>()  //Use Startup class for application configuration
+            //     .Build()    //Build the server
+            //     .Run();
+            
+            // var host = new HostBuilder()
+            //     .ConfigureServices(services =>
+            //     {
+            //         services.AddControllers();
+            //     })
+            //     .Configure(app =>
+            //     {
+            //         app.UseRouting();
+            //     
+            //         app.UseEndpoints(endpoints =>
+            //         {
+            //             endpoints.MapControllerRoute(
+            //                 name: "default",
+            //                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            //         });
+            //     })
+            //     .Build();
+            //
+            // var host = new WebHostBuilder()
+            //     .UseKestrel()
+            //     .UseContentRoot(Directory.GetCurrentDirectory())
+            //     .ConfigureServices(services =>
+            //     {
+            //         services.AddControllers();
+            //     })
+            //     .Configure(app =>
+            //     {
+            //         app.UseRouting();
+            //
+            //         app.UseEndpoints(endpoints =>
+            //         {
+            //             endpoints.MapControllerRoute(
+            //                 name: "default",
+            //                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            //         });
+            //     })
+            //     .Build();
+            
+            // host.Run();
             
             var provider = services.BuildServiceProvider();
             var options = provider.GetRequiredService<IOptions<CircleOptions>>().Value;

@@ -1,6 +1,5 @@
 using System;
 using Circle.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace IntegrationTest
@@ -14,12 +13,12 @@ namespace IntegrationTest
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) => 
+                .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddCircle(
-                    options =>
+                    services.AddCircle(options =>
                     {
                         options.Period = TimeSpan.FromSeconds(5);
+                        // options.OnceLaunch = true;
                         options.UseHandler<Work>();
                     });
                 });

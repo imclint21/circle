@@ -7,7 +7,7 @@ namespace IntegrationTest
     {
         public void DoWork()
         {
-            Console.Write("Test!");
+            Console.WriteLine("Test!");
         }
     }
 }
