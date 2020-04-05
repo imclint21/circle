@@ -1,6 +1,6 @@
 <p align="center">
   <p align="center">
-    <img src="https://user-images.githubusercontent.com/5221349/78506525-4ffe4200-777a-11ea-9666-b73e2779aa23.png" height="100" alt="Circle" />
+    <img src="https://user-images.githubusercontent.com/5221349/78506525-4ffe4200-777a-11ea-9666-b73e2779aa23.png" height="77" alt="Circle" />
   </p>
   <h3 align="center">
     About Circle
@@ -35,10 +35,32 @@ You need to create a new class that inherits from `IWorkHandler`, and write the 
 
 ```csharp
 public class Work : IWorkHandler
-  {
-      public void DoWork()
-      {
-          Console.WriteLine("Test!");
-      }
-  }
-  ```
+{
+    public void DoWork()
+    {
+        Console.WriteLine("Test!");
+    }
+}
+```
+  
+  ### Control It
+  
+  You can use `CircleControl` class to start, stop or restart the service.
+  
+  ```csharp
+ public class HomeController : Controller
+{
+    private readonly CircleControl _circle;
+
+    public HomeController(CircleControl circle)
+    {
+        _circle = circle;
+    }
+
+    public IActionResult Stop()
+    {
+        _circle.Stop();
+        return Ok();
+    }
+}
+```
