@@ -43,7 +43,7 @@ public class Work : IWorkHandler
 }
 ```
   
-  ### Control It
+  ### Control the Job
   
   You can use `CircleControl` class to start, stop or restart the service.
   
